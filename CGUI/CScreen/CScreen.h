@@ -6,9 +6,13 @@
 #define KODASS_CSCREEN_H
 
 
-class CScreen {
+namespace kds {
 
-};
+    class CScreen {
+
+    };
+
+}
 
 
 #endif //KODASS_CSCREEN_H

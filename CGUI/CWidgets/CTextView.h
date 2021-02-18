@@ -13,18 +13,47 @@
 #include <string>
 #include <sstream>
 
-#include "../View/CView.h"
+#include <CView.h>
+#include <CScreen.h>
 
 
 namespace kds {
 
     class CTextView : public CView {
+    public:
+        explicit CTextView(CScreen *view);
+
+        CTextView(CScreen *view, const std::string& text);
+
+        void setText(std::string text);
+
+        void addText(std::string text);
+
+        std::string getText() const;
+
+        void setTextSize(size_t size);
+
+        size_t getTextSize() const;
+
+        void setContainer(CScreen *view);
+
+        CScreen *getContainer() const;
+
+        void setTextColor(Color color);
+
+        Color getTextColor() const;
+
+        void render() override;
+
     protected:
         // текст
         std::stringstream m_text{};
 
-        // цвет текста
+        // Размер текста
+        size_t m_text_size{};
 
+        // Контейнер
+        CScreen *m_container{};
     };
 
 }

@@ -3,28 +3,39 @@
 #include <iostream>
 #include <sstream>
 
+#include <CScreen.h>
+#include <CTextView.h>
+
+using namespace kds;
+
+
 int main() {
+
+    CScreen cScreen;
+    CTextView cTextView(&cScreen, "My text!");
+
+    cTextView.render();
 
 //    std::cout << "\x1B[38;5;227mIn color" << std::endl;
 //    std::cout << "\x1B[0mIn color" << std::endl;
-
-    std::cout << "\x1B[?25l";
-    std::cout << "\x1B[s";
-    while (true) {
-        std::cout << "\x1B[u";
-        for (int i{16}; i < 48; ++i) {
-            std::cout << "\x1B[38;5;" << i << "m>";
-            for (int i{}; i < 100000; ++i);
-        }
-
-        std::cout << "\x1B[u";
-
-        for (int i{48}; i > 16; --i) {
-            std::cout << "\x1B[38;5;" << i << "m>";
-            for (int i{}; i < 100000; ++i);
-        }
-    }
-
+//
+//    std::cout << "\x1B[?25l";
+//    std::cout << "\x1B[s";
+//    while (true) {
+//        std::cout << "\x1B[u";
+//        for (int i{16}; i < 48; ++i) {
+//            std::cout << "\x1B[38;5;" << i << "m>";
+//            for (int i{}; i < 100000; ++i);
+//        }
+//
+//        std::cout << "\x1B[u";
+//
+//        for (int i{48}; i > 16; --i) {
+//            std::cout << "\x1B[38;5;" << i << "m>";
+//            for (int i{}; i < 100000; ++i);
+//        }
+//    }
+//
 
 //    std::cout << "Что - то важное!" << '\n';
 //    std::cout << "Что - то важное!" << '\n';

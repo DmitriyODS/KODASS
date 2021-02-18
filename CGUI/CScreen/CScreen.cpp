@@ -3,3 +3,9 @@
 //
 
 #include "CScreen.h"
+
+namespace kds {
+
+
+
+}
