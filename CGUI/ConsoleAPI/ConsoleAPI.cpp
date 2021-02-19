@@ -225,7 +225,7 @@ namespace kds {
         out << UPPER_CONNECTOR_;
     }
 
-    void setAreaScroll(size_t first_str, size_t end_str, std::ostream &outColor) {
+    void setAreaScroll(size_t first_str, size_t end_str, std::ostream &out) {
         out << EXEC_ << OPEN_TAG_ << first_str << ";" << end_str << SET_AREA_SCROLL_XY_;
     }
 }

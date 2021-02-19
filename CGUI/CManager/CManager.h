@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-#include "ConsoleAPI.h"
+#include "../ConsoleAPI/ConsoleAPI.h"
 
 
 namespace kds {
@@ -121,7 +121,7 @@ namespace kds {
 
         const SizeArea &getConsoleSize() const;
 
-        void &setConsoleSize(SizeArea console_size);
+        void setConsoleSize(SizeArea console_size);
 
         const Coordinates &getCursorPos() const;
 
@@ -189,21 +189,21 @@ namespace kds {
         // Текущие цвета консоли
         Color m_color_background{};
         Color m_color_front{};
-        Bool m_color_inverted{};
+        bool m_color_inverted{};
 
         // Текущие свойства текста
-        Bool m_text_is_bold{};
-        Bool m_text_is_dim{};
-        Bool m_text_is_underlined{};
-        Bool m_text_is_blink{};
-        Bool m_text_is_hidden{};
+        bool m_text_is_bold{};
+        bool m_text_is_dim{};
+        bool m_text_is_underlined{};
+        bool m_text_is_blink{};
+        bool m_text_is_hidden{};
 
         // Текущее состояние курсора
-        Bool m_cursor_is_blink{};
-        Bool m_cursor_is_visible{};
+        bool m_cursor_is_blink{};
+        bool m_cursor_is_visible{};
 
         // Режим консоли
-        Bool m_console_is_dec{};
+        bool m_console_is_dec{};
 
         // Заголовок консоли
         std::string m_title_console{};
