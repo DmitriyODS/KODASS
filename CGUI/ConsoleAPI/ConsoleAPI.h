@@ -130,6 +130,8 @@ namespace kds {
 
     void drawUpperConnector(std::ostream &outColor = std::cout);
 
+    void setAreaScroll(size_t first_str, size_t end_str, std::ostream &outColor = std::cout);
+
 }
 
 // Ввод ANSI последовательности

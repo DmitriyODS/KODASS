@@ -76,11 +76,11 @@ namespace kds {
     }
 
     void moveCursorByXY(size_t x, size_t y, std::ostream &out) {
-        out << EXEC_ << OPEN_TAG_ << x << ";" << y << CUR_JMP_POS_XY_VL_;
+        out << EXEC_ << OPEN_TAG_ << y << ";" << x << CUR_JMP_POS_XY_VL_;
     }
 
     void moveCursorByXYHVP(size_t x, size_t y, std::ostream &out) {
-        out << EXEC_ << OPEN_TAG_ << x << ";" << y << CUR_JMP_POS_XY_HVP_VL_;
+        out << EXEC_ << OPEN_TAG_ << y << ";" << x << CUR_JMP_POS_XY_HVP_VL_;
     }
 
     void savePosCursor(std::ostream &out) {
@@ -223,5 +223,9 @@ namespace kds {
 
     void drawUpperConnector(std::ostream &out) {
         out << UPPER_CONNECTOR_;
+    }
+
+    void setAreaScroll(size_t first_str, size_t end_str, std::ostream &outColor) {
+        out << EXEC_ << OPEN_TAG_ << first_str << ";" << end_str << SET_AREA_SCROLL_XY_;
     }
 }
