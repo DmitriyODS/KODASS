@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.17)
-project(THEME)
+project(Context)
 
 set(CMAKE_CXX_STANDARD 20)
 
 # Переменные, хранящие файлы библиотек
-set(C_THEME_SRC Theme.h Theme.cpp)
+set(C_CONTEXT_SRC Context.h Context.cpp)
 
 
 add_library(
-        THEME
-        ${C_THEME_SRC}
+        Context
+        ${C_CONTEXT_SRC}
 )

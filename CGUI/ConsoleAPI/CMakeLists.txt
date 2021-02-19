@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.17)
-project(CManager)
+project(ConsoleAPI)
 
 set(CMAKE_CXX_STANDARD 20)
 
-# Переменные, хранящие файлы библиотек
-set(C_MANAGER_SRC ConsoleAPI.h ConsoleAPI.cpp)
+# Переменные, хранящие файлы библиотеки
+set(CONSOLE_API_SRC ConsoleAPI.h ConsoleAPI.cpp)
 
 
 add_library(
-        CManager
+        ConsoleAPI
         ${C_MANAGER_SRC}
 )
