@@ -2,13 +2,15 @@
 // Created by osipo on 17.02.2021.
 //
 
+#include <Theme.h>
+
 #include "CView.h"
 
 
 namespace kds {
 
 
-    CView::CView() {
+    CView::CView(Context &context) : m_context(context) {
         init();
     }
 
@@ -40,7 +42,7 @@ namespace kds {
         return m_background_color;
     }
 
-    CView::Color CView::getFrontColor() const {
+    Color CView::getFrontColor() const {
         return m_front_color;
     }
 
@@ -82,5 +84,13 @@ namespace kds {
 
     size_t CView::getPositionY() const {
         return m_position_y;
+    }
+
+    void CView::render() const{
+
+    }
+
+    Context &CView::getContext() const {
+        return m_context;
     }
 }

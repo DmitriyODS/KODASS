@@ -21,9 +21,9 @@ namespace kds {
 
     class CTextView : public CView {
     public:
-        explicit CTextView(CScreen *view);
+        explicit CTextView(CScreen &view);
 
-        CTextView(CScreen *view, const std::string& text);
+        CTextView(CScreen &view, const std::string &text);
 
         void setText(std::string text);
 
@@ -35,15 +35,13 @@ namespace kds {
 
         size_t getTextSize() const;
 
-        void setContainer(CScreen *view);
+        CScreen &getContainer() const;
 
-        CScreen *getContainer() const;
+//        void setTextColor(Color color);
 
-        void setTextColor(Color color);
+//        Color getTextColor() const;
 
-        Color getTextColor() const;
-
-        void render() override;
+        void render() const override;
 
     protected:
         // текст
@@ -53,7 +51,7 @@ namespace kds {
         size_t m_text_size{};
 
         // Контейнер
-        CScreen *m_container{};
+        CScreen &m_container;
     };
 
 }

@@ -19,20 +19,13 @@ namespace kds {
     public:
         using Id = unsigned long int;
 
-        virtual std::string getNameType() const;
-
-        Id getId() const;
-
-        virtual void setNameType(std::string name_type);
+        [[nodiscard]] Id getId() const;
 
         virtual void render() const = 0;
 
     protected:
         // Уникальный идентификатор объекта
         Id m_id{};
-
-        // Название типа отображения
-        std::string m_name_type{};
 
         // Функция инициализации объекта
         void init();

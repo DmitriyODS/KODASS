@@ -2,143 +2,133 @@
 // Created by osipo on 18.02.2021.
 //
 
-#ifndef KODASS_CMANAGER_H
-#define KODASS_CMANAGER_H
+#ifndef KODASS_CONSOLEAPI_H
+#define KODASS_CONSOLEAPI_H
 
 #include <iostream>
 
+/*
+ * Набор функций для тонкой настройки и взаимодействия
+ * с консолью вне зависимости от операционной системы
+ */
+
 namespace kds {
 
-    class CManager {
-    public:
-        using Color = unsigned short;
+    using Color = unsigned short;
 
-        enum class ParamClearDSPSTR {
-            toEnd = 0,
-            toCursor = 1,
-            toAll = 2
-        };
-
-        CManager(std::ostream &out, std::istream &in);
-
-        CManager(CManager &) = delete;
-
-        CManager &operator=(CManager &) = delete;
-
-        void clearStyle();
-
-        void setBackColor(Color color);
-
-        void setFrontColor(Color color);
-
-        void setBoldText(bool set);
-
-        void setDimText(bool set);
-
-        void setUnderlinedText(bool set);
-
-        void setBlinkText(bool set);
-
-        void setInvertedText(bool set);
-
-        void setHiddenText(bool set);
-
-        void moveCursorUp(size_t n = 1);
-
-        void moveCursorDown(size_t n = 1);
-
-        void moveCursorRight(size_t n = 1);
-
-        void moveCursorLeft(size_t n = 1);
-
-        void moveCursorDownByString(size_t n = 1);
-
-        void moveCursorUpByString(size_t n = 1);
-
-        void moveCursorHorizontalAbsolutely(size_t n = 0);
-
-        void moveCursorVerticalAbsolutely(size_t n = 0);
-
-        void moveCursorByXY(size_t x = 0, size_t y = 0);
-
-        void moveCursorByXYHVP(size_t x = 0, size_t y = 0);
-
-        void savePosCursor();
-
-        void restorePosCursor();
-
-        void setBlinkCursor(bool set);
-
-        void setVisibleCursor(bool set);
-
-        void scrollUp(size_t n = 1);
-
-        void scrollDown(size_t n = 1);
-
-        void pasteSpaceCursorLeft(size_t n = 1);
-
-        void delSymbolRight(size_t n = 1);
-
-        void clearSymbolCursor(size_t n = 1);
-
-        void pasteCursorInBuffer(size_t n = 1);
-
-        void delString(size_t n = 1);
-
-        void clearDSP(ParamClearDSPSTR param);
-
-        void clearStr(ParamClearDSPSTR param);
-
-        void getPosCursor(size_t pos[]);
-
-        void turnHorizontalTab();
-
-        void moveCursorNext(size_t n = 1);
-
-        void moveCursorBack(size_t n = 1);
-
-        void clearTab();
-
-        void clearAllTab();
-
-        void turnDec();
-
-        void turnAscii();
-
-        void resetCmd();
-
-        void setWidth_132();
-
-        void setWidth_80();
-
-        void setTitleCmd(const std::string &str);
-
-        void drawBottomRightCorner();
-
-        void drawUpperRightCorner();
-
-        void drawUpperLeftCorner();
-
-        void drawLowerLeftCorner();
-
-        void drawLineTransfer();
-
-        void drawHorizontalLine(size_t len = 1);
-
-        void drawVerticalLine(size_t len = 1);
-
-        void drawLeftConnector();
-
-        void drawRightConnector();
-
-        void drawBottomConnector();
-
-        void drawUpperConnector();
-
-    private:
-        std::ostream &m_out;
-        std::istream &m_in;
+    enum class ParamClearDSPSTR {
+        toEnd = 0,
+        toCursor = 1,
+        toAll = 2
     };
+
+    void clearStyle(std::ostream &out = std::cout);
+
+    void setBackColor(Color color, std::ostream &outColor = std::cout);
+
+    void setFrontColor(Color color, std::ostream &outColor = std::cout);
+
+    void setBoldText(bool set, std::ostream &outColor = std::cout);
+
+    void setDimText(bool set, std::ostream &outColor = std::cout);
+
+    void setUnderlinedText(bool set, std::ostream &outColor = std::cout);
+
+    void setBlinkText(bool set, std::ostream &outColor = std::cout);
+
+    void setInvertedText(bool set, std::ostream &outColor = std::cout);
+
+    void setHiddenText(bool set, std::ostream &outColor = std::cout);
+
+    void moveCursorUp(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void moveCursorDown(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void moveCursorRight(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void moveCursorLeft(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void moveCursorDownByString(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void moveCursorUpByString(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void moveCursorHorizontalAbsolutely(size_t n = 0, std::ostream &outColor = std::cout);
+
+    void moveCursorVerticalAbsolutely(size_t n = 0, std::ostream &outColor = std::cout);
+
+    void moveCursorByXY(size_t x = 0, size_t y = 0, std::ostream &outColor = std::cout);
+
+    void moveCursorByXYHVP(size_t x = 0, size_t y = 0, std::ostream &outColor = std::cout);
+
+    void savePosCursor(std::ostream &outColor = std::cout);
+
+    void restorePosCursor(std::ostream &outColor = std::cout);
+
+    void setBlinkCursor(bool set, std::ostream &outColor = std::cout);
+
+    void setVisibleCursor(bool set, std::ostream &outColor = std::cout);
+
+    void scrollUp(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void scrollDown(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void pasteSpaceCursorLeft(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void delSymbolRight(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void clearSymbolCursor(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void pasteCursorInBuffer(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void delString(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void clearDSP(ParamClearDSPSTR param, std::ostream &outColor = std::cout);
+
+    void clearStr(ParamClearDSPSTR param, std::ostream &outColor = std::cout);
+
+    void turnHorizontalTab(std::ostream &outColor = std::cout);
+
+    void moveCursorNext(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void moveCursorBack(size_t n = 1, std::ostream &outColor = std::cout);
+
+    void clearTab(std::ostream &outColor = std::cout);
+
+    void clearAllTab(std::ostream &outColor = std::cout);
+
+    void turnDec(std::ostream &outColor = std::cout);
+
+    void turnAscii(std::ostream &outColor = std::cout);
+
+    void resetCmd(std::ostream &outColor = std::cout);
+
+    void setWidth_132(std::ostream &outColor = std::cout);
+
+    void setWidth_80(std::ostream &outColor = std::cout);
+
+    void setTitleCmd(const std::string &str, std::ostream &outColor = std::cout);
+
+    void drawBottomRightCorner(std::ostream &outColor = std::cout);
+
+    void drawUpperRightCorner(std::ostream &outColor = std::cout);
+
+    void drawUpperLeftCorner(std::ostream &outColor = std::cout);
+
+    void drawLowerLeftCorner(std::ostream &outColor = std::cout);
+
+    void drawLineTransfer(std::ostream &outColor = std::cout);
+
+    void drawHorizontalLine(size_t len = 1, std::ostream &outColor = std::cout);
+
+    void drawVerticalLine(std::ostream &outColor = std::cout);
+
+    void drawLeftConnector(std::ostream &outColor = std::cout);
+
+    void drawRightConnector(std::ostream &outColor = std::cout);
+
+    void drawBottomConnector(std::ostream &outColor = std::cout);
+
+    void drawUpperConnector(std::ostream &outColor = std::cout);
 
 }
 
@@ -348,29 +338,4 @@ namespace kds {
  * Следующие последовательности позволяют программе настроить область
  * прокрутки экрана, на которую влияют операции прокрутки.
  * Это подмножество строк, которые корректируются при
- * прокручивании экрана иным образом (например, в "\n" или RI).
- * Эти поля также влияют на строки, измененные при выполнении
- * операций вставки строки (IL), удаления строки (DL),
- * прокрутки вверх (SU) и прокрутки вниз (SD).
- * Поля прокрутки могут особенно пригодиться для отображения
- * части экрана, которая не прокручивается при заполнении
- * остальной части экрана. Например, заголовок окна вверху
- * или строка состояния в нижней части приложения.
- * Для DECSTBM есть два необязательных параметра: <t> и <b>.
- * Они используются для указания строк, представляющих
- * верхние и нижние строки области прокрутки (включительно).
- * Если параметры не указаны, <t> по умолчанию
- * равно 1, а <b> — текущей высоте окна просмотра.
- * Поля прокрутки задаются для каждого буфера, поэтому важно,
- * чтобы альтернативный и основной буфер поддерживали отдельные
- * параметры полей прокрутки (таким образом полноэкранное
- * приложение в альтернативном буфере не навредит полям основного
- *
- * Example:
- *  [ <t> ; <b> r
- */
-#define SET_AREA_SCROLL_XY_ "r"
-
-// https://docs.microsoft.com/ru-ru/windows/console/console-virtual-terminal-sequences
-
-#endif //KODASS_CMANAGER_H
+ * прокручивании экрана иным образом (например, в "\

@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.17)
-project(CWidgets)
+project(THEME)
 
 set(CMAKE_CXX_STANDARD 20)
 
 # Переменные, хранящие файлы библиотек
-set(C_TEXTVIEW_SRC CTextView/CTextView.h CTextView/CTextView.cpp)
+set(C_THEME_SRC Theme.h Theme.cpp)
 
 
 add_library(
-        CWidgets
-        ${C_TEXTVIEW_SRC}
+        THEME
+        ${C_THEME_SRC}
 )

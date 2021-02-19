@@ -9,6 +9,7 @@
 #ifndef KODASS_CVIEW_H
 #define KODASS_CVIEW_H
 
+#include <Context.h>
 #include "AView.h"
 
 
@@ -16,9 +17,7 @@ namespace kds {
 
     class CView : public AView {
     public:
-        using Color = unsigned short;
-
-        CView();
+        explicit CView(Context &context);
 
         void setWidth(size_t width);
 
@@ -56,7 +55,9 @@ namespace kds {
 
         size_t getPositionY() const;
 
-        virtual void render();
+        Context &getContext() const;
+
+        void render() const override;
 
     protected:
         // Размеры элемента 1 позиция = одному символу
@@ -79,9 +80,11 @@ namespace kds {
         // Положение
         size_t m_position_x{};
         size_t m_position_y{};
+
+        // Контекст приложения
+        Context &m_context;
     };
 
 }
-
 
 #endif //KODASS_CVIEW_H

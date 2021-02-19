@@ -1,41 +1,31 @@
-#include <CTextView.h>
+#include <CTextView/CTextView.h>
 
 #include <iostream>
 #include <sstream>
 
 #include <CScreen.h>
-#include <CTextView.h>
-#include "CGUI/CManager/CManager.h"
+#include <CTextView/CTextView.h>
+#include "CGUI/CManager/ConsoleAPI.h"
+
+#include <Context.h>
+#include <Theme.h>
 
 using namespace kds;
 
 
 int main() {
 
-//    CScreen cScreen;
-//    CTextView cTextView(&cScreen, "My text!");
-//
-//    cTextView.render();
-
     CManager cManager(std::cout, std::cin);
 
-    cManager.setBackColor(21);
+    Theme theme{};
 
-    std::cout << "Test Color!" << std::endl;
+    Context context(cManager, theme);
 
-    cManager.clearStyle();
+    CScreen cScreen(context);
 
-    std::cout << "Test two!" << std::endl;
+    CTextView cTextView(cScreen, "My text!");
 
-    cManager.turnDec();
-
-    cManager.drawHorizontalLine(25);
-
-    std::cout << std::endl;
-
-    cManager.drawVerticalLine(25);
-
-    cManager.turnAscii();
+    cTextView.render();
 
     return 0;
 }

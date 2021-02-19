@@ -5,10 +5,14 @@
 #ifndef KODASS_CSCREEN_H
 #define KODASS_CSCREEN_H
 
+#include <CView.h>
+
 
 namespace kds {
 
-    class CScreen {
+    class CScreen : public CView {
+    public:
+        explicit CScreen(Context &context);
 
     };
 

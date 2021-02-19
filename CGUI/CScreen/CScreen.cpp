@@ -7,5 +7,6 @@
 namespace kds {
 
 
-
+    CScreen::CScreen(Context &context) : CView(context) {
+    }
 }
