@@ -5,7 +5,7 @@
 #include "ConsoleAPI.h"
 
 
-namespace kds {
+namespace CAPI {
 
     void clearStyle(std::ostream &out) {
         out << EXEC_ << CLEAR_;

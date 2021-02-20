@@ -10,10 +10,13 @@
 #include <string>
 #include <vector>
 
-#include "../ConsoleAPI/ConsoleAPI.h"
+#include "ConsoleAPI.h"
 
 
 namespace kds {
+
+    using CAPI::Color;
+    using CAPI::ParamClearDSPSTR;
 
     struct Coordinates {
         size_t x{}, y{};
@@ -24,7 +27,9 @@ namespace kds {
     };
 
     class CManager {
+
     public:
+
         CManager(std::ostream &out, std::istream &in, SizeArea sizeArea);
 
         CManager(const CManager &cManager) = delete;
@@ -67,7 +72,7 @@ namespace kds {
 
         void drawRectangleOutLine(Coordinates start_pos, SizeArea size_window);
 
-        void drawScreenByMarkup(const std::vector <std::string> &markup, Coordinates start_pos);
+        void drawScreenByMarkup(const std::vector<std::string> &markup, Coordinates start_pos);
 
         void drawRectangleSolid(Coordinates start_pos, SizeArea size_window);
 
@@ -209,7 +214,7 @@ namespace kds {
         std::string m_title_console{};
 
         // Стек позиций курсора
-        std::stack <Coordinates> m_stack_pos_cursor{};
+        std::stack<Coordinates> m_stack_pos_cursor{};
     };
 
 }

@@ -12,7 +12,7 @@
  * с консолью вне зависимости от операционной системы
  */
 
-namespace kds {
+namespace CAPI {
 
     using Color = unsigned short;
 
