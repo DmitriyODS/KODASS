@@ -26,11 +26,16 @@ namespace kds {
         size_t width{}, height{};
     };
 
+    struct ColorScheme {
+        Color color_background{};
+        Color color_front{};
+    };
+
     class CManager {
 
     public:
 
-        CManager(std::ostream &out, std::istream &in, SizeArea sizeArea);
+        CManager(std::ostream &out, std::istream &in, SizeArea sizeArea, ColorScheme colorScheme);
 
         CManager(const CManager &cManager) = delete;
 
@@ -70,11 +75,11 @@ namespace kds {
 
         void drawRightLineRec(size_t len);
 
-        void drawRectangleOutLine(Coordinates start_pos, SizeArea size_window);
+        void drawPolygon(Coordinates start_pos, SizeArea size_window);
 
         void drawScreenByMarkup(const std::vector<std::string> &markup, Coordinates start_pos);
 
-        void drawRectangleSolid(Coordinates start_pos, SizeArea size_window);
+        void drawPolygonSolid(Coordinates start_pos, SizeArea size_window);
 
         void resetParamCmd();
 
@@ -138,7 +143,7 @@ namespace kds {
 
         Color getCurColorFront() const;
 
-        void setCurColorFront(bool set);
+        void setCurColorFront(Color color);
 
         bool isCurColorInverted() const;
 
