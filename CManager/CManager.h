@@ -81,6 +81,10 @@ namespace kds {
 
         void drawPolygonSolid(Coordinates start_pos, SizeArea size_window);
 
+        void fillColorArea(Coordinates start_pos, SizeArea sizeArea);
+
+        void fillColorLine(size_t len);
+
         void resetParamCmd();
 
         void resetStyleCmd();

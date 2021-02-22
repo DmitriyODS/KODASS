@@ -33,16 +33,12 @@ namespace kds {
 
     void CManager::drawVerticalLine(size_t len) {
         if (len <= m_console_size.height) {
-            for (size_t i{}; i < len; ++i) {
+            CAPI::drawVerticalLine(m_console_out);
+            for (size_t i{1}; i <= len; ++i) {
+                setCursorPos(Coordinates{m_cursor_pos.x, m_cursor_pos.y + 1});
                 CAPI::drawVerticalLine(m_console_out);
-                ++m_cursor_pos.y;
-                CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.y, m_console_out);
             }
-        }
-
-        if (m_cursor_pos.y > m_console_size.height) {
-            m_cursor_pos.y = m_console_size.height;
-            CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.y, m_console_out);
+            ++m_cursor_pos.x;
         }
     }
 
@@ -130,73 +126,166 @@ namespace kds {
     void CManager::drawLeftLineRec(size_t len) {
         if (len <= m_console_size.height) {
             CAPI::drawUpperLeftCorner(m_console_out);
-            drawHorizLine(len - 2);
+            ++m_cursor_pos.y;
+            CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.y, m_console_out);
+            drawVerticalLine(len - 2);
             CAPI::drawLowerLeftCorner(m_console_out);
-            m_cursor_pos.y += 2;
+            ++m_cursor_pos.y;
         }
     }
 
     void CManager::drawRightLineRec(size_t len) {
         if (len <= m_console_size.height) {
             CAPI::drawUpperRightCorner(m_console_out);
-            drawHorizLine(len - 2);
+            ++m_cursor_pos.y;
+            CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.y, m_console_out);
+            drawVerticalLine(len - 2);
             CAPI::drawBottomRightCorner(m_console_out);
-            m_cursor_pos.y += 2;
+            ++m_cursor_pos.y;
         }
     }
 
     void CManager::drawPolygon(Coordinates start_pos, SizeArea size_window) {
-        if (start_pos.x + size_window.width <= size_window.width &&
-            start_pos.y + size_window.height <= size_window.height) {
+        if (start_pos.x + size_window.width <= m_console_size.width &&
+            start_pos.y + size_window.height <= m_console_size.height) {
             m_cursor_pos = start_pos;
             CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.y, m_console_out);
             drawUpLineRec(size_window.width);
-            m_cursor_pos = start_pos;
-            CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.x, m_console_out);
-            drawLeftLineRec(size_window.height);
-            --m_cursor_pos.x;
-            CAPI::moveCursorBack(1, m_console_out);
-            drawDownLineRec(size_window.width);
+
             --m_cursor_pos.x;
             CAPI::moveCursorBack(1, m_console_out);
             drawRightLineRec(size_window.height);
-            m_cursor_pos.x = size_window.width;
-            m_cursor_pos.y = size_window.height;
+
+            m_cursor_pos = start_pos;
             CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.x, m_console_out);
+            drawLeftLineRec(size_window.height);
+
+            --m_cursor_pos.x;
+            CAPI::moveCursorBack(1, m_console_out);
+            drawDownLineRec(size_window.width);
         }
     }
 
     void CManager::drawScreenByMarkup(const std::vector<std::string> &markup, Coordinates start_pos) {
         if (start_pos.y + markup.size() <= m_console_size.height &&
             start_pos.x + markup.at(0).size() <= m_console_size.width) {
-            m_cursor_pos = start_pos;
-            for (const std::string &it : markup) {
 
+            setCursorPos(start_pos);
+
+            bool mod{};
+            for (const std::string &it : markup) {
+                for (const char &ch : it) {
+                    if (ch == '~') {
+                        mod = true;
+                        continue;
+                    }
+
+                    if (mod) {
+                        mod = false;
+
+                        switch (ch) {
+                            case 'q':
+                                CAPI::drawUpperLeftCorner(m_console_out);
+                                break;
+                            case 'w':
+                                CAPI::drawUpperConnector(m_console_out);
+                                break;
+                            case 'e':
+                                CAPI::drawUpperRightCorner(m_console_out);
+                                break;
+                            case 'd':
+                                CAPI::drawRightConnector(m_console_out);
+                                break;
+                            case 's':
+                                CAPI::drawLineTransfer(m_console_out);
+                                break;
+                            case 'a':
+                                CAPI::drawLeftConnector(m_console_out);
+                                break;
+                            case 'z':
+                                CAPI::drawLowerLeftCorner(m_console_out);
+                                break;
+                            case 'x':
+                                CAPI::drawBottomConnector(m_console_out);
+                                break;
+                            case 'c':
+                                CAPI::drawBottomRightCorner(m_console_out);
+                                break;
+                            case '-':
+                                m_console_out << '-';
+                                break;
+                            case '|':
+                                m_console_out << '|';
+                                break;
+                            case '#':
+                                m_console_out << '#';
+                                break;
+                            default:
+                                m_console_out << ' ';
+                                break;
+                        }
+                    } else {
+                        switch (ch) {
+                            case '-':
+                                CAPI::drawHorizontalLine(1, m_console_out);
+                                break;
+                            case '|':
+                                CAPI::drawVerticalLine(m_console_out);
+                                break;
+                            case '#':
+                                m_console_out << ' ';
+                                break;
+                            default:
+                                m_console_out << ch;
+                                break;
+                        }
+                    }
+
+                    ++m_cursor_pos.x;
+                }
+                setCursorPos(Coordinates{start_pos.x, m_cursor_pos.y + 1});
             }
         }
+    }
+
+    void CManager::fillColorLine(size_t len) {
+        if (len <= m_console_size.width) {
+            CAPI::pasteSpaceCursorLeft(len, m_console_out);
+            m_cursor_pos.x += len;
+        }
+    }
+
+    void CManager::fillColorArea(Coordinates start_pos, SizeArea sizeArea) {
+        if (start_pos.x + sizeArea.width <= m_console_size.width &&
+            start_pos.y + sizeArea.height <= m_console_size.height) {
+            setCursorPos(start_pos);
+            fillColorLine(sizeArea.width);
+            for (size_t i{1}; i <= sizeArea.height; ++i) {
+                setCursorPos(Coordinates{start_pos.x, m_cursor_pos.y + 1});
+                fillColorLine(sizeArea.width);
+            }
+        }
+
     }
 
     void CManager::drawPolygonSolid(Coordinates start_pos, SizeArea size_window) {
         if (start_pos.x + size_window.width <= size_window.width &&
             start_pos.y + size_window.height <= size_window.height) {
-            m_cursor_pos = start_pos;
-            CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.y, m_console_out);
+
+            setCursorPos(start_pos);
+
             drawUpLineRec(size_window.width);
-            m_cursor_pos = start_pos;
 
-            //TODO: Долгая отрисовка всего окна
+            setCursorPos(Coordinates{start_pos.x, m_cursor_pos.y + 1});
 
-            CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.x, m_console_out);
-            drawLeftLineRec(size_window.height);
-            --m_cursor_pos.x;
-            CAPI::moveCursorBack(1, m_console_out);
-            drawDownLineRec(size_window.width);
-            --m_cursor_pos.x;
-            CAPI::moveCursorBack(1, m_console_out);
-            drawRightLineRec(size_window.height);
-            m_cursor_pos.x = size_window.width;
-            m_cursor_pos.y = size_window.height;
-            CAPI::moveCursorByXY(m_cursor_pos.x, m_cursor_pos.x, m_console_out);
+            for (size_t i{}; i <= size_window.height; ++i) {
+                drawVerticalLine(1);
+                fillColorLine(size_window.width - 2);
+                drawVerticalLine(1);
+                setCursorPos(Coordinates{start_pos.x, m_cursor_pos.y + 1});
+            }
+
+            drawUpLineRec(size_window.width);
         }
     }
 

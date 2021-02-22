@@ -180,49 +180,71 @@ namespace CAPI {
     }
 
     void drawBottomRightCorner(std::ostream &out) {
+        turnDec(out);
         out << BOTTOM_RIGHT_CORNER_;
+        turnAscii(out);
     }
 
     void drawUpperRightCorner(std::ostream &out) {
+        turnDec(out);
         out << UPPER_RIGHT_CORNER_;
+        turnAscii(out);
     }
 
     void drawUpperLeftCorner(std::ostream &out) {
+        turnDec(out);
         out << UPPER_LEFT_CORNER_;
+        turnAscii(out);
     }
 
     void drawLowerLeftCorner(std::ostream &out) {
+        turnDec(out);
         out << LOWER_LEFT_CORNER_;
+        turnAscii(out);
     }
 
     void drawLineTransfer(std::ostream &out) {
+        turnDec(out);
         out << LINE_TRANSFER_;
+        turnAscii(out);
     }
 
     void drawHorizontalLine(size_t len, std::ostream &out) {
+        turnDec(out);
         for (size_t i{}; i < len; ++i) {
             out << HORIZONTAL_LINE_;
         }
+        turnAscii(out);
     }
 
     void drawVerticalLine(std::ostream &out) {
+        turnDec(out);
         out << VERTICAL_LINE_;
+        turnAscii(out);
     }
 
     void drawLeftConnector(std::ostream &out) {
+        turnDec(out);
         out << LEFT_CONNECTOR_;
+        turnAscii(out);
     }
 
     void drawRightConnector(std::ostream &out) {
+        turnDec(out);
         out << RIGHT_CONNECTOR_;
+        turnAscii(out);
     }
 
     void drawBottomConnector(std::ostream &out) {
+        turnDec(out);
         out << BOTTOM_CONNECTOR_;
+        turnAscii(out);
     }
 
     void drawUpperConnector(std::ostream &out) {
+        turnDec(out);
         out << UPPER_CONNECTOR_;
+        turnAscii(out);
     }
 
     void setAreaScroll(size_t first_str, size_t end_str, std::ostream &out) {
